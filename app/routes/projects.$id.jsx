@@ -80,7 +80,7 @@ export default function Project() {
                             </li>
                         ))
                         }
-                        {(navigation.state !== 'idle') &&
+                        {(navigation.formData) &&
                             <li>
                                 <input
                                     type="checkbox"

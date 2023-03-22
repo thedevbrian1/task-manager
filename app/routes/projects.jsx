@@ -23,9 +23,10 @@ export async function action({ request }) {
     if (Object.values(fieldError).some(Boolean)) {
         return badRequest({ fieldError });
     }
-    await createProject(projectTitle);
+    const project = await createProject(projectTitle);
+    const id = project.id;
 
-    return redirect('/projects');
+    return redirect(`/projects/${id}`);
 }
 
 export default function Projects() {
