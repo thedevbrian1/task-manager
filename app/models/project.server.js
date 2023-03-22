@@ -3,7 +3,7 @@ import { db } from "~/utils/db.server";
 export async function getProjects() {
     return db.project.findMany({
         include: {
-            task: true
+            tasks: true
         }
     });
 }
@@ -14,7 +14,7 @@ export async function getProjectById(id) {
             id
         },
         include: {
-            task: true,
+            tasks: true,
         }
     });
 }

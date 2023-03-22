@@ -4,19 +4,19 @@ export async function createTask(title, projectId) {
     return db.task.create({
         data: {
             title,
-            completed: false,
+            complete: false,
             projectId
         }
     });
 }
 
-export async function updateTask(id) {
+export async function updateTask(id, complete) {
     return db.task.update({
         where: {
             id,
         },
         data: {
-            completed: true
+            complete
         }
     })
 }
