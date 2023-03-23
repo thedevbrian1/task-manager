@@ -17,17 +17,17 @@ export async function action({ request, params }) {
     const projectId = params.id;
     const formData = await request.formData();
 
-    console.log('Checked!');
+    // console.log('Checked!');
 
     // return null;
 
     if (request.method.toLowerCase() === 'put') {
-        // const completed = formData.get('completed');
-        // const id = formData.get('id');
-        // console.log({ completed });
+        const complete = formData.get('complete');
+        const id = formData.get('id');
+        // console.log({ complete });
 
-        // await updateTask(Number(id), JSON.parse(completed));
-        console.log('Complete');
+        await updateTask(id, JSON.parse(complete));
+        // console.log('Complete');
         return null;
     }
     else if (request.method.toLowerCase() === 'post') {
@@ -67,11 +67,10 @@ export default function Project() {
                                 <input
                                     type="checkbox"
                                     id={task.id}
-                                    // name="completed"
-                                    // checked={task.complete}
+                                    checked={task.complete}
                                     // onChange={(event) => handleChange(event, task.id)}
                                     onChange={(event) => submit(
-                                        { complete: String(event.target.checked), id: String(id) },
+                                        { complete: String(event.target.checked), id: String(task.id) },
                                         { method: "put", replace: true })
                                     }
                                     className="inline mr-1"
@@ -80,7 +79,7 @@ export default function Project() {
                             </li>
                         ))
                         }
-                        {(navigation.formData) &&
+                        {(navigation.formData && navigation.formMethod === 'post') &&
                             <li>
                                 <input
                                     type="checkbox"
@@ -94,7 +93,7 @@ export default function Project() {
 
                     </ul>
                 )
-                : <p className="mt-6 text-gray-400">No tasks yet</p>}
+                : <p className="mt-6 text-gray-400">No {data.title.toLowerCase()} yet</p>}
 
             <Form method="post" ref={formRef}>
                 <input type="checkbox" disabled />

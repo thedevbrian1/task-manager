@@ -31,6 +31,8 @@ export async function action({ request }) {
 
 export default function Projects() {
     const data = useLoaderData();
+    // console.log({ data });
+
     const actionData = useActionData();
     const navigation = useNavigation();
 
@@ -44,15 +46,15 @@ export default function Projects() {
 
     return (
         <main className="flex gap-10 divide-x-2 min-h-screen">
-            <div className="pl-8 w-96">
+            <div className="pl-8 w-80">
                 {data.length > 0
                     ? (<ul className="mt-6 w-full">
                         {data.map(project => (
                             <li key={project.id} className="py-2 w-full">
-                                {/* <NavLink to={`/projects/${project.id}`} className={`hover:bg-gray-200 py-2 rounded ${({ isActive }) => isActive ? 'bg-white' : ''}`}>{project.title}
-                        </NavLink> */}
-                                <NavLink to={`/projects/${project.id}`} className={({ isActive }) => isActive ? 'bg-white py-2 px-4 rounded' : 'py-2 px-4 hover:bg-gray-200'}>{project.title}
+                                <NavLink to={`/projects/${project.id}`} className={({ isActive }) => isActive ? 'bg-white py-2 px-4 rounded flex justify-between w-full' : 'py-2 px-4 hover:bg-gray-200 flex justify-between w-full'}>{project.title}
+                                    <small className="bg-[#dfdedf] p-1 rounded">{`${project.tasks.filter(task => task.complete === true).length} / ${project.tasks.length}`}</small>
                                 </NavLink>
+
                             </li>
                         ))}
                     </ul>)
